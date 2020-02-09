@@ -24,7 +24,7 @@ volumes: [
             pwd
             export "GIT_BRANCH=${gitBranch}"
             export "GIT_COMMIT=${gitCommit}"
-            gradle test
+            gradle -d test
             """
         }
       }
@@ -35,7 +35,7 @@ volumes: [
     }
     stage('Build') {
       container('gradle') {
-        sh "gradle build"
+        sh "gradle -d build"
       }
     }
     stage('Create Docker images') {
