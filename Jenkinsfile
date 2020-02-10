@@ -40,5 +40,13 @@ volumes: [
         """
       }
     }
+    stage('Push to Container') {
+          container('docker') {
+            sh """
+            pwd
+            docker
+            """
+          }
+        }
   }
 }
