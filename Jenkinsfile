@@ -35,21 +35,7 @@ volumes: [
     }
     stage('Build') {
       container('gradle') {
-        sh "gradle build"
-      }
-    }
-    stage('Create Docker images') {
-      container('docker') {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-          credentialsId: 'dockerhub',
-          usernameVariable: 'DOCKER_HUB_USER',
-          passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
-          sh """
-            docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}
-            docker build -t namespace/my-image:${gitCommit} .
-            docker push namespace/my-image:${gitCommit}
-            """
-        }
+        sh "gradle build -Partifactory_user=admin -Partifactory_password=admin1234 -Partifactory_contextUrl=http://10.1.0.158:80/artifactory
       }
     }
   }
