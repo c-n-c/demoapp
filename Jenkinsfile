@@ -24,7 +24,7 @@ volumes: [
             pwd
             export "GIT_BRANCH=${gitBranch}"
             export "GIT_COMMIT=${gitCommit}"
-            gradle test
+            gradle test -Partifactory_user=admin -Partifactory_password=admin123 -Partifactory_contextUrl=http://10.1.0.176:80/artifactory
             """
         }
       }
