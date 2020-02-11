@@ -22,7 +22,7 @@ volumes: [
       try {
         container('gradle') {
           sh """
-            pwd && ls && cd demoapp
+            pwd && ls
             export "GIT_BRANCH=${gitBranch}"
             export "GIT_COMMIT=${gitCommit}"
             gradle test -Partifactory_user=admin -Partifactory_password=admin123 -Partifactory_contextUrl=${ARTIFACTORY_URL}/artifactory
@@ -37,7 +37,7 @@ volumes: [
     stage('Build') {
       container('gradle') {
         sh """
-        pwd && ls && cd demoapp
+        pwd && ls
         gradle build -Partifactory_user=admin -Partifactory_password=admin123 -Partifactory_contextUrl=${ARTIFACTORY_URL}/artifactory
         """
       }
@@ -45,7 +45,7 @@ volumes: [
     stage('Push to Container') {
           container('docker') {
             sh """
-            pwd && ls && cd demoapp
+            pwd && ls
             docker login ${ARTIFACTORY_URL} -u admin -p admin123
             docker build -t "${ARTIFACTORY_URL}/dino/upload-files:${shortGitcommit}" .
             docker push "${ARTIFACTORY_URL}/dino/upload-files:${shortGitcommit}"
