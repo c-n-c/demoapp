@@ -17,6 +17,7 @@ volumes: [
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
     def ARTIFACTORY_URL = "http://10.1.0.176:80"
+    def ARTIFACTORY_REGISTRY = "http://10.1.0.178:90"
 
     stage('Test') {
       try {
@@ -46,9 +47,9 @@ volumes: [
           container('docker') {
             sh """
             pwd && ls
-            docker login ${ARTIFACTORY_URL} -u admin -p admin123
-            docker build -t "${ARTIFACTORY_URL}/dino/upload-files:${shortGitcommit}" .
-            docker push "${ARTIFACTORY_URL}/dino/upload-files:${shortGitcommit}"
+            docker login ${ARTIFACTORY_REGISTRY} -u admin -p admin123
+            docker build -t "${ARTIFACTORY_REGISTRY}/dino/upload-files:${shortGitcommit}" .
+            docker push "${ARTIFACTORY_REGISTRY}/dino/upload-files:${shortGitcommit}"
             """
           }
         }
