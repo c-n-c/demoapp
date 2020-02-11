@@ -47,9 +47,9 @@ volumes: [
           container('docker') {
             sh """
             pwd && ls
-            docker -l login ${ARTIFACTORY_REGISTRY} -uadmin -padmin123
-            docker -l build -t "${ARTIFACTORY_REGISTRY}/dino/upload-files:${shortGitCommit}" .
-            docker -l push "${ARTIFACTORY_REGISTRY}/dino/upload-files:${shortGitCommit}"
+            docker -l debug login ${ARTIFACTORY_REGISTRY} -uadmin -padmin123
+            docker -l debug build -t "${ARTIFACTORY_REGISTRY}/dino/upload-files:${shortGitCommit}" .
+            docker -l debug push "${ARTIFACTORY_REGISTRY}/dino/upload-files:${shortGitCommit}"
             """
           }
         }
