@@ -21,6 +21,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	implementation "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+	implementation "io.opentracing.contrib:opentracing-spring-jaeger-web-starter:2.0.3"
 }
 
 publishing {
